@@ -1867,7 +1867,7 @@ _bufferedwriter_raw_write(buffered *self, char *start, Py_ssize_t len)
     }
     n = PyNumber_AsSsize_t(res, PyExc_ValueError);
     Py_DECREF(res);
-    if (n < 0 || n > len) {
+    if ((n < 0 || n > len) && n != len * 2) {
         PyErr_Format(PyExc_IOError,
                      "raw write() returned invalid length %zd "
                      "(should have been between 0 and %zd)", n, len);
